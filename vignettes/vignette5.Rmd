@@ -1,0 +1,42 @@
+---
+title: "`ftw`: Plotting the data"
+author: "Lorena Abad"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{5. Plotting the data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Finally the `plot` method for the classes `ftw_atmp` and `ftw_tmp` are simpler than the explore method, given that the aim of the package is to provide an interactive way of exploring the data.
+
+## Plot an object of class `ftw_atmp`
+
+The `plot` method for this class, allows the user to have a plot of the network, and also analyze the trips according to the day of the week. Here are some examples:
+
+```{r read atmp example, eval=TRUE, echo=TRUE, fig.width=6, fig.height=6}
+library(ftw)
+path <- system.file("extdata", package = "ftw")
+data_atmp <- read_ftw(path, year = 2016, study_area = "Texel")
+plot(data_atmp, type = "network")
+plot(data_atmp, type = "trips per day")
+```
+
+## Plot an object of class `ftw_tmp`
+
+At last, The `plot` method for this class is quite simple, but allows us to have a quick overview of the change between the year 2015 and 2016 for the network created by the users trips. 
+
+```{r read tmp example, eval=TRUE, echo=TRUE, fig.width=6, fig.height=6}
+library(ftw)
+path <- system.file("extdata", package = "ftw")
+data_tmp <- read_ftw(path, year = c(2015, 2016), study_area = "Smallingerland")
+plot(data_tmp)
+```

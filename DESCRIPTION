@@ -1,0 +1,28 @@
+Package: ftw
+Type: Package
+Title: Explore Fietstelweek data for delimited study areas
+Version: 0.1.0
+Authors@R: person("Lorena", "Abad", ,"l_abad01@uni-muenster.de", c("aut","cre"))
+Description: Fietstelweek is, translated from Dutch, the National Bicycle Count week. 
+    It is a crowdsourced initiative to collect data about daily bike trips which 
+    will serve to improve the cycling infrastructure of the national, regional, and 
+    local bike network. The data was collected during a week, between September 14th and 
+    20th, for 2015, and between September 19th and 25th for 2016. 
+    This package allows to download, summarize, plot, and explore the data in R 
+    for a study area within the Netherlands. This allows for a faster data visualization 
+    and analysis of the data by clipping it to a maneageble size for R.
+Imports:
+    sf,
+    utils,
+    dplyr,
+    data.table,
+    RCurl,
+    tmap
+Depends: R (>= 2.10)
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

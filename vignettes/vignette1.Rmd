@@ -1,0 +1,54 @@
+---
+title: "`ftw`: Fietstelweek data"
+author: "Lorena Abad"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{1. Fietstelweek data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Data description
+Fietstelweek is, translated from Dutch, the National Bicycle Count week. It is a crowdsourced initiative to collect data about daily bike trips which will serve to improve the cycling infrastructure of the national, regional, and local bike network. 
+
+The data was collected during a week, between September 14th and 20th, for 2015, 
+and between September 19th and 25th for 2016. The data collection is performed 
+through a mobile app which makes use of the cellphone GPS to track the trips. 
+The users need to turn on the app before their trips and log them. 
+
+On their website they state that:
+
+> "In 2015 and 2016 the National Bicycle Count Week (Fietstelweek) took place 
+    in the Netherlands. Together with approximately 50,000 Dutch people, we have 
+    mapped out how to drive from A to B,  at what speed, at what times, with how 
+    many at once and where the major delays are. View the results of this bicycle 
+    survey yourself via the "Bikeprint" [portal]."
+([via fietstelweek.nl](http://fietstelweek.nl/data/resultaten/))
+
+The data is effectively available on [Bikeprint](http://www.bikeprint.nl/fietstelweek/)
+for download, and includes spatial files for edges and nodes (conforming a network), 
+and a table for routes during different times of the day for the seven days. 
+
+## Data drawbacks 
+The extent of the data covers the whole country and is somehow quite heavy to handle in R. 
+Even if read as an sf object, the data takes some time to load into R, and it gets more complicated when trying to analyze, summarize or plot the data. In addition, doing spatial analyzes with the data will usually be performed at a higher spatial resolution, like local levels, which will require some pre-processing of the data. 
+
+## Package motivation 
+The Fietstelweek data is a valuable source of information for urban planners in the Netherlands. The initiative itself could be replicated in other countries. Therefore, the need to have tools that allow its exploration and visualization are important. The R software, is a strong statistical tool that can handle very well spatial data since the development of packages like *gdal*, *ogr*, *sp*, *sf*, *raster*, etc. Hence, spatially analizing the data on this software could represent a powerful tool to transform this data into knowledge. 
+
+## Package objective 
+The package aims to make the Fietstelweek data for 2015 and 2016 available and easy to use, explore, visualize and handle by R users. As said before, this data will usually be used at a local level, therefore, the package main advantage is that it clips the data for a desired study area, that can comprise a municipality or a province within the Netherlands. 
+
+The useful functions that can be found on the package are summarized on the following points:
+
+* [Downloading the data](vignette("vignette2", package = "ftw"))
+* [Reading the data](vignette("vignette3", package = "ftw"))
+* [Exploring the data](vignette("vignette4", package = "ftw"))

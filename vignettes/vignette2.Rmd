@@ -1,0 +1,96 @@
+---
+title: "`ftw`: Downloading the data"
+author: "Lorena Abad"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{2. Downloading the data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The Fietstelweek data can be directly accessed with the `ftw` package without first downloading the data from the [Bikeprint](http://www.bikeprint.nl/fietstelweek/) website. As explained before, the aim is to make the data available for smaller administrative regions of the Netherlands. We might be interested only in one single region, or could be interested on making a comparison between regions. Therefore, the ways of accessing the data can be summarized in:
+
+* [Getting data for only one specific administrative region](#m1)
+* [Getting data for several administrative regions for comparison](#m2) 
+
+The three ways that will be further explained below, also allow us to download data not only for 2015 or 2016, but also for both years, if the final aim is to compare the data temporally. 
+
+## Getting data for only one specific administrative region {#m1}
+If we are interested in one specific region, then the package will only create the clipped files and store them on our computer, allowing him to open the data not only on R but also on any other GIS software. This approach will also avoid storing the large files that the complete data of the Fietstelweek is made of, which goes up to 1.5GB. 
+
+To do so, we can use the `downloader_clip_ftw` function. This function needs a directory where the data will be downloaded to, allows us to select if we will download data from 2015 or 2016 or both, and asks for the study area name which will correspond to an administrative region. Here is an example on how to use it to download data from Hoorn for 2015 and 2016. 
+
+```{r download clip example, eval=FALSE, echo=TRUE}
+library(ftw)
+path <- "path/to/download/directory"
+downloader_clip_ftw(path, year = c(2015, 2016), study_area = "Amsterdam", municipality = TRUE)
+```
+
+The generated directory will contain the following sub-directories and files:
+
+```{r directory clip, eval=TRUE, echo=FALSE}
+library(ftw)
+ftw:::dir_dl_clip
+```
+
+The administrative region should correspond to either a municipality or to a province of the Netherlands. A complete list of both of them can be accessed by typing the following on the console.
+
+```{r administrative regions}
+library(ftw)
+
+municipalities
+
+provinces
+```
+
+The function gets the download links from the [Bikeprint](http://www.bikeprint.nl/fietstelweek/) website, downloads them, loads them in R, clips them, and write the resulting files within the directory with the following structure. This is why the function might take some time to run, depending on the amount of information that the study region has, and the internet connection. For example, downloading the data for Amsterdam for both years:
+
+```{r system time, eval=TRUE, echo=FALSE} 
+library(ftw)
+ftw:::st
+```
+
+Overall, the data downloading can be long, but if it is only used once, can be a good price to pay. 
+
+
+## Getting data for several administrative regions for comparison {#m2}
+The second option involves taking two separate steps. First we will download the complete data set into a directory and then we will clip the data to our desired area of interest. The advantage of this method is that the data will be on the computer so a second or third clip will avoid the downloading of the data. 
+
+To do so, we will find two functions on the package. The first one is `downloader_ftw` which requires the directory where the data will be downloaded, and the year or years we want to download. Here is an example of the function usage:
+
+```{r download example, eval=FALSE, echo=TRUE}
+library(ftw)
+path <- "path/to/download/directory"
+downloader_ftw(path, year = c(2015, 2016))
+```
+
+The generated directory will contain the following sub-directories and files:
+
+```{r directory downloader, eval=TRUE, echo=FALSE}
+library(ftw)
+ftw:::dir_dl
+```
+ 
+As can be seen the number of directories increases, as this is the format how the data is zipped on the [Bikeprint](http://www.bikeprint.nl/fietstelweek/) website.
+
+After downloading the data, we can make use of the function `clip_ftw`, which requires a directory, preferably the same where the complete data has been downloaded. It will again ask for the year and the study area. An example of its usage would be:
+
+```{r clip example, eval=FALSE, echo=TRUE}
+library(ftw)
+path <- "path/to/download/directory"
+clip_ftw(path, year = c(2015, 2016), study_area = "Amsterdam")
+```
+
+To create a second or a third data set, we need to run the code again, with the different names. We can also download the data manually, but we will need to provide the path to the files for each year on the function. 
+
+Both methods save the new created data into a .csv file for the routes and .gpkg files for the nodes and edges. 
+
+The [next vignette](vignette("vignette3", package = "ftw")) will show how to load the newly created data into R. 

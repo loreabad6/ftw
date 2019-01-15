@@ -1,0 +1,33 @@
+---
+title: "`ftw`: Final remarks"
+author: "Lorena Abad"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{6. Final remarks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Package development
+
+To sum up, the package allows the user to download the Fietstelweek data from its server for 2015 and 2016, clip it to a smaller administrative area, wheter it is a municipality or a province, with the help of four new functions. All the functions are explained on a series of vignettes. Due to the large computation times, the examples are ommited. 
+
+It loads the data into R and facilitates its exploration considering four different methods: three standard methods: `print`, `summary`, and `plot`, and a new method: `explore`, for two new classes `ftw_atmp` when the data is loaded for one single year, and `ftw_tmp` when the data is loaded for both years. 
+
+The package checks without `errors` or `warnings`. It does include a `note`, regarding the size of the external and internal data included, however, it can be ignored. 
+
+## Future work
+
+The package allows for a quick exploration and familiarization with the Fietstelweek data. However, the data has a great potential regarding bike infrastructure and urban mobility analyses. Some future work regarding the development of this package could include:
+
+* Further integration of the data between the network and the trips can be performed for larger analyses.
+* Generation of shortest paths which can be compared with the actual routes the cyclists provided. 
+* Generation of origin-destination matrices which can allow an analysis of the transportation fluxes within the municipalities or provinces. 

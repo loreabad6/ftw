@@ -1,0 +1,58 @@
+---
+title: "`ftw`: Reading the data"
+author: "Lorena Abad"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{3. Reading the data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Reading the data 
+
+Two sample data-sets can be found within the package. One for the municipality of Smallingerland and another for the municipality of Texel. Both data sets have data for 2015 and 2016. The structure of the file directories are the same as the structure constantly used by the `ftw` package to return the function values. 
+
+Here is an example on how to load the data:
+
+```{r read tmp example, eval=TRUE, echo=TRUE}
+library(ftw)
+path <- system.file("extdata", package = "ftw")
+data_tmp <- read_ftw(path, year = c(2015, 2016), study_area = "Smallingerland")
+data_tmp
+```
+
+A summary of the data will allow us to know basic information regarding the data, specifically the number of edges, nodes and unique trips for each year. 
+
+```{r summary tmp example, eval=TRUE, echo=TRUE}
+summary(data_tmp)
+```
+
+Notice that we loaded the data for both years. This will result on an object of class `ftw_tmp`, which is meant to enable the user to do comparisons between years when exploring the data. 
+
+```{r class tmp example, eval=TRUE, echo=TRUE}
+class(data_tmp)
+```
+
+If we load the data only for one year, the result will be an object of class `ftw_atmp`, let's see an example.
+
+```{r read atmp example, eval=TRUE, echo=TRUE}
+library(ftw)
+path <- system.file("extdata", package = "ftw")
+data_atmp <- read_ftw(path, year = 2016, study_area = "Texel")
+data_atmp
+```
+
+```{r summary atmp example, eval=TRUE, echo=TRUE}
+class(data_atmp)
+summary(data_atmp)
+```
+
+The [next vignette](vignette("vignette4", package = "ftw")) will show the different ways to explore the data depending on its class. 

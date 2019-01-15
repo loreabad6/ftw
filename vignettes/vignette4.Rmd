@@ -1,0 +1,65 @@
+---
+title: "`ftw`: Exploring the data"
+author: "Lorena Abad"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{4. Exploring the data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+As explained before, the data loads either as a class `ftw_atmp` or `ftw_tmp`, which will allow two types of data exploration. To explore the data, the `ftw` package has incorporated a new method: `explore`. This method takes advantage of the `tmap` package viewer mode to explore the data. Next, we will see the `explore` method for each class.
+
+## Explore an object of class `ftw_atmp`
+
+First we will need to access the directory, to do so we use the read_ftw function:
+
+```{r read atmp example, eval=TRUE, echo=TRUE}
+library(ftw)
+path <- system.file("extdata", package = "ftw")
+data_atmp <- read_ftw(path, year = 2016, study_area = "Texel")
+```
+
+We can use the default values for the `explore` method which will show a map of the edges and nodes, i.e. the network:
+```{r explore atmp example, eval=TRUE, echo=TRUE, fig.width=6, fig.height=6}
+explore(data_atmp)
+```
+
+If we change the type, we can explore even more the data, for example changing it to `edges` will allow us to view the edges colored by `intensity` or `speed`. If we change it to `nodes` it will show the nodes colored by `waiting time` or by `count`. If we change it to `trips` we can subset the data per day of the week or per hour.
+
+```{r explore atmp 1 example, eval=TRUE, echo=TRUE, fig.width=6, fig.height=6}
+explore(data_atmp, type = "edges", edges_coledges = "speed")
+```
+
+```{r explore atmp 2 example, eval=TRUE, echo=TRUE, fig.width=6, fig.height=6}
+explore(data_atmp, type = "nodes", nodes_colnodes = "waiting time")
+```
+
+```{r explore atmp 3 example, eval=TRUE, echo=TRUE, fig.width=6, fig.height=6}
+# Shows the trips on a monday at 13h00
+explore(data_atmp, type = "trips", trips_weekday = 0, trips_hour = 13)
+```
+
+## Explore an object of class `ftw_tmp`
+The `explore` method for temporal data gives the same functionalities as the method for atemporal data but returns two maps, showing the data for 2015 (left) and 2016 (right).
+
+```{r read tmp example, eval=TRUE, echo=TRUE}
+library(ftw)
+path <- system.file("extdata", package = "ftw")
+data_tmp <- read_ftw(path, year = c(2015, 2016), study_area = "Smallingerland")
+```
+
+When can call the `explore` method for the `ftw_tmp` class like this:
+```{r explore tmp example, eval=TRUE, echo=TRUE}
+explore(data_tmp)
+```
+
+However, the R packages vignettes fail to render it. So, we can test it on our console or view it on the popup window! The [last vignette](vignette("vignette5", package = "ftw")) will show how the `plot` method works for each class. 
