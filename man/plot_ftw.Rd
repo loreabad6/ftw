@@ -3,7 +3,6 @@
 \name{plot_ftw}
 \alias{plot_ftw}
 \alias{plot.ftw_atmp}
-\alias{plot_ftw}
 \alias{plot.ftw_tmp}
 \title{Plot the clipped Fietstelweek data}
 \usage{

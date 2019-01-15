@@ -5,8 +5,9 @@
 \title{Clip Fietstelweek data to a study area of interest}
 \usage{
 clip_ftw(directory, year, study_area, municipality = TRUE, ...,
-  edges_file_2015 = NULL, nodes_file_2015 = NULL, routes_file_2015 = NULL,
-  edges_file_2016 = NULL, nodes_file_2016 = NULL, routes_file_2016 = NULL)
+  edges_file_2015 = NULL, nodes_file_2015 = NULL,
+  routes_file_2015 = NULL, edges_file_2016 = NULL,
+  nodes_file_2016 = NULL, routes_file_2016 = NULL)
 }
 \arguments{
 \item{directory}{filepath to the directory where the Fietstelweek data is and will be stored.}

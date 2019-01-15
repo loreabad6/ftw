@@ -252,11 +252,17 @@ clip_ftw <- function(
       }
 
       clip_links <- suppressWarnings(sf::st_intersection(links, outline))
-      nummer <- clip_links$LINKNUMMER
       source <- clip_links$SOURCE
       target <- clip_links$TARGET
       clip_knopen <- dplyr::filter(knopen, KNOOPNUMME %in% source | KNOOPNUMME %in% target)
       clip_knopen <- suppressWarnings(sf::st_intersection(clip_knopen, outline))
+      clip_links <- clip_links %>%
+        dplyr::filter(
+          SOURCE %in% clip_knoden$KNOOPNUMME
+          &
+          TARGET %in% clip_knopen$KNOOPNUMME
+        )
+      nummer <- clip_links$LINKNUMMER
       clip_routes <- dplyr::filter(routes, linknummer %in% nummer)
 
       clip_links <- sf::st_transform(clip_links, crs = 3857)

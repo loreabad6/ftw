@@ -2,9 +2,7 @@
 % Please edit documentation in R/explore.R
 \name{explore}
 \alias{explore}
-\alias{explore}
 \alias{explore.ftw_atmp}
-\alias{explore}
 \alias{explore.ftw_tmp}
 \title{Explore the clipped Fietstelweek data}
 \usage{

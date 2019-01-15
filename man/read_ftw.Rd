@@ -2,13 +2,9 @@
 % Please edit documentation in R/read.R
 \name{read_ftw}
 \alias{read_ftw}
-\alias{read_ftw}
 \alias{print.ftw_atmp}
-\alias{read_ftw}
 \alias{print.ftw_tmp}
-\alias{read_ftw}
 \alias{summary.ftw_atmp}
-\alias{read_ftw}
 \alias{summary.ftw_tmp}
 \title{Read clipped Fietstelweek data resulting of \code{clip_ftw}}
 \usage{
